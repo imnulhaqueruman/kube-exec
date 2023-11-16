@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xterm.js Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/xterm/css/xterm.css" />
+</head>
+<body>
+
+<div id="terminal"></div>
+
+<script src="https://unpkg.com/xterm/lib/xterm.js"></script>
+<script>
+    const terminalContainer = document.getElementById('terminal');
+    const terminal = new Terminal();
+    terminal.open(terminalContainer);
+
+    const socket = new WebSocket("ws://localhost:4000/ws");
+
+    socket.addEventListener('open', (event) => {
+        console.log('WebSocket connection opened:', event);
+
+        // Replace "your-pod-name" and "default" with your actual pod name and namespace.
+        const commandMessage = {
+            PodName: "ubuntu-6646d69989-d8sb4",
+            Namespace: "default",
+            Command: "ls",
+        };
+
+        socket.send(JSON.stringify(commandMessage));
+
+        // Set up xterm.js to send user input to the WebSocket
+        terminal.onData(data => {
+            socket.send(data);
+            console.log(data)
+        });
+
+        // Set up xterm.js to display output from the WebSocket
+        socket.addEventListener('message', event => {
+            terminal.write(event.data);
+            console.log(event.data)
+        });
+        const timeout = 600000; // 1 minute in milliseconds
+        setTimeout(() => {
+            console.log('Closing WebSocket connection after 1 minute.');
+            socket.addEventListener('close', event => {
+            console.log('WebSocket connection closed:', event);
+            terminal.write('\r\nConnection closed.\r\n');
+        });
+        }, timeout);
+        // Handle WebSocket closure
+       
+
+        // Handle WebSocket errors
+        socket.addEventListener('error', error => {
+            console.error('WebSocket error:', error);
+        });
+    });
+
+</script>
+
+</body>
+</html>
