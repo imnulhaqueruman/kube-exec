@@ -20,4 +20,5 @@ cd <repository-directory>
      Command: "ls",
         
 ```
-![example](https://blog-bucket.s3.brilliant.com.bd/thumbnail/aa9f37f0-ea95-4ecf-b821-5bacbfd09927.png)
+<img src="https://blog-bucket.s3.brilliant.com.bd/thumbnail/aa9f37f0-ea95-4ecf-b821-5bacbfd09927.png" alt="ls command output" width="300"/>
+
