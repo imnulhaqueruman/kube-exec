@@ -6,6 +6,7 @@ To get started with this project, follow these steps to clone the repository:
 ```bash
 git clone <repository-url>
 cd <repository-directory>
+go run main.go
 ```
 
 # Running the index.html File with VS Code Live Server
