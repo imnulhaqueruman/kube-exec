@@ -10,7 +10,8 @@ go run main.go
 ```
 
 # Running the index.html File with VS Code Live Server
-### To run the index.html file, you can use Visual Studio Code's Live Server extension. Open the project in VS Code, install the Live Server extension if you haven't already, and then right-click on the index.html file and select "Open with Live Server."
+
+#### To run the index.html file, you can use Visual Studio Code's Live Server extension. Open the project in VS Code, install the Live Server extension if you haven't already, and then right-click on the index.html file and select "Open with Live Server."
 
 #### This will launch the HTML file in a browser, and you can interact with your application
 
